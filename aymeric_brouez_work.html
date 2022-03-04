@@ -7,8 +7,8 @@
 
 		<title>Aymeric Brouez Portfolio work</title>
 
-		<link rel="stylesheet" media="screen and (min-width: 800px)" href="aymeric_brouez_portfolio.css">
-		<link rel="stylesheet" media="screen and (max-width: 800px)" href="aymeric_brouez_portfolio_Mobile.css">
+		<link rel="stylesheet" media="screen and (min-width: 900px)" href="aymeric_brouez_portfolio.css">
+		<link rel="stylesheet" media="screen and (max-width: 900px)" href="aymeric_brouez_portfolio_mobile.css">
 
 		<link rel="shortcut icon" type="image/x-icon" href="img/icon.png">
 
@@ -28,6 +28,18 @@
 				<a href="aymeric_brouez_work.html" id="onglet_actif" class="menu">Work</a>
 				<a href="aymeric_brouez_contact.html" class="menu">Contact</a>
 			</div>
+			<script>
+			var prevScrollpos = window.pageYOffset;
+			window.onscroll = function() {
+			  var currentScrollPos = window.pageYOffset;
+			  if (prevScrollpos > currentScrollPos) {
+			    document.getElementById("header").style.top = "0";
+			  } else {
+			    document.getElementById("header").style.top = "-500px";
+			  }
+			  prevScrollpos = currentScrollPos;
+			}
+			</script>
 
 		</div>
 

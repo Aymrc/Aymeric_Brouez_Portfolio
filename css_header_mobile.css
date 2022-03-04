@@ -7,6 +7,7 @@
 
 	background-color: none;
 	text-align: center;
+	transition: bottom 0.3s;
 	z-index: 2;
 }
 
@@ -15,14 +16,14 @@
 	width: 100%;
 	height: auto;
 	bottom: 0;
-	padding-bottom: 1em;
-	font-size: 1.6em;
+	padding-bottom: 0.5em;
+	font-size: 1.5em;
 	background-color: black;
 }
 
 .header_ad {
 	position: absolute;
-	bottom: 3.8em;
+	bottom: 2.7em;
 	padding-bottom: 0.5em;
 	left: 50%;
 	width: 100%;
@@ -34,7 +35,7 @@
 
 .header_menu {
 	position: absolute;
-	bottom: 4.8em;
+	bottom: 3.8em;
 	padding-bottom: 1em;
 	padding-top: 1em;
 	border-top: 0.5px solid white;
@@ -42,6 +43,11 @@
 	width: 100%;
 	height: auto;
 	background-color: black;
+}
+
+.menu {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
 }
 
 a {
