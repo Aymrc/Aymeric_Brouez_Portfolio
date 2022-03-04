@@ -25,6 +25,12 @@ body {
 	color: var(--textcolor);
 }
 
+.website-counter {
+	position:  aboslute; 
+	top:  0; 
+	left: 0; 
+	color:  var(--background_color);
+}
 
 
 
