@@ -130,7 +130,7 @@ body {
 
 .content_intro {
 	position: absolute;
-	top: 85%;
+	top: 90%;
 	left: 50%;
 	width: 80%;
 	transform: translate(-50%, -50%);
