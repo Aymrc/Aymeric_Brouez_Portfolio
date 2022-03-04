@@ -88,6 +88,7 @@ body {
 
 		.section_2 {
 			position: relative;
+			margin-top: 10vh;
 			width: 100%;
 			height: auto;
 		}
@@ -141,7 +142,6 @@ body {
 	left: 50%;
 	width: 80%;
 	transform: translate(-50%, -50%);
-	margin-bottom: 15vh;
 
 	text-align: left;
 }
