@@ -1,0 +1,71 @@
+/* HEADER */
+
+.hello_world{
+	position: absolute;
+	height: auto;
+
+	width: 100%;
+	top: 0%;
+	left: 50%;
+	transform: translate(-50%, -1.5em);
+
+	margin: auto;
+	text-align: left;
+	font-size: 1.2em;
+}
+
+/*   1   */
+#hi1:before{
+	content: "bonjour,";
+	animation-name: anime1;
+  	animation-duration: 3s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes anime1 {
+	0%, 25% {color: white;}
+	26%, 100%{color: transparent;}
+}
+
+/*   2   */
+#hi2:before{
+	content: "hello,";
+	animation-name: anime2;
+  	animation-duration: 3s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes anime2 {
+	0%, 25%{color: transparent;}
+	26%, 49% {color: white;}
+	50%, 100%{color: transparent;}
+}
+
+/*   3   */
+#hi3:before{
+	content: "你好,";
+	animation-name: anime3;
+  	animation-duration: 3s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes anime3 {
+	0%, 49%{color: transparent;}
+	50%, 74%{color: white;}
+	75%, 100%{color: transparent;}
+}
+
+/*   4   */
+#hi4:before{
+	content: "hallo,";
+	animation-name: anime4;
+  	animation-duration: 3s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes anime4 {
+	0%, 74%{color: transparent;}
+	75%, 100%{color: white;}
+}
+
+/* HEADER END*/

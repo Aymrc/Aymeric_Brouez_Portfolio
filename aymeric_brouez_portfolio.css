@@ -1,0 +1,303 @@
+
+
+
+/* 
+Hi, this is my css for my online portfolio. This is hand-made and personnal. 
+No copy or reproduction is allowed. If interested in anything, please contact me first.
+*/
+
+
+
+@import url("css_header.css");
+@import url("css_hello_world.css");
+
+:root {
+	--textcolor:  white;
+	--background_color: #121212; /* #faf7f1 */
+}
+
+body {
+	background-color: var(--background_color);
+	padding: 0;
+	margin: 0;
+	height: 100vh;
+	font-family: 'helvetica', sans-serif;
+	color: var(--textcolor);
+}
+
+
+
+
+/*
+.scroll {
+	position: absolute;
+	bottom: 2em;
+	left: 0em;
+	border-left: 3px solid black;
+	transform: rotate(-90deg);
+}*/
+
+.scroll {
+	position: absolute;
+	left: 2.5em;
+	bottom: 4.5em;
+}
+
+.scroll_down_text {
+	display: inline-block;
+	transform: rotate(-45deg);
+	left: 0px;
+}
+
+p.scroll_text {
+	border-left: 1px solid var(--textcolor);
+	width: 2em;
+	height: 2em;
+	border-left-width: 5px;
+	border-bottom: 1px solid var(--textcolor);
+	border-bottom-width: 5px;
+	animation: scroll_animation 1.5s linear infinite;
+	transform: rotate(-45deg);
+}
+
+@keyframes scroll_animation {
+	0% {transform: translate(0px);}
+	50% {transform: translate(-3em, 3em);}
+	100% {transform: translate(0px);}
+}
+
+
+.portfolio_background {
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	font-family: 'times new roman';
+	font-size: 12vw;
+	color: white;
+	opacity: 0.2;
+
+	z-index: -1;
+}
+
+
+/* MAIN */
+.content {
+	position: relative;
+	top: 0px;
+	width: 100%;
+	height: auto;
+	background-color: none;
+
+	font-size: 1.3em;
+}
+
+		/* sections */
+		.section_1 {
+			position: relative;
+			left: 50%;
+			width: 50%;
+			height: 100vh;
+		}
+
+		.section_2 {
+			position: relative;
+			width: 100%;
+			height: auto;
+		}
+
+		.section_3 {
+			position: relative;
+			width: 100%;
+			height: auto;
+		}
+
+		.section_4 {
+			position: relative;
+			width: 100%;
+			height: auto;
+		}
+
+		.section_5_footer {
+			position: relative;
+			width: 100%;
+			height: auto;
+		}
+
+		.section_contact {
+			position: relative;
+			width: 100%;
+			top: 6vh;
+			height: 94vh;
+		}
+		/* sections end */
+
+.column_left, .column_right {
+	position: relative;
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+
+.column_left {
+	background-color: none;
+}
+
+.column_right {
+	background-color: none;
+}
+
+.content_intro {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	transform: translate(-50%, -50%);
+
+	text-align: left;
+}
+
+.content_intro_picture {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 55%;
+	background-color: none;
+	transform: translate(-50%, -50%);
+	
+	text-align: center;
+}
+
+.content_title {
+	margin-left: 3em;
+}
+
+h1 {
+	font-size:  1.8em;
+	font-style: bold;
+}
+
+.content_date, .content_text {
+	height: 5.5em;
+	display: flex;
+	float:  left;
+}
+.content_date {
+	width: 20%;
+}
+
+.content_text {
+	width: 80%;
+}
+
+span.titre_content {
+	font-weight: bold;
+}
+
+/* MAIN END*/
+
+/* CONTACT */
+.contact_ad {
+	position: absolute;
+	width: 80%;
+	height: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.contact_adresse {
+	position: absolute;
+	width: 40%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: auto;
+}
+
+/* CONTACT END */
+
+/* WORK */
+
+.WIP {
+	position: relative; 
+	height: 94vh; 
+	text-align: center; 
+	font-size: 1em;
+}
+.WIP_text {
+	position: absolute;
+	top: 50%; 
+	left: 50%; 
+	transform: translate(-50%, -50%);
+}
+
+.pWIP {
+	font-size: 5em;
+	margin: 0;
+}
+
+a.portfolio_hover:hover {
+	cursor: url('/uploads/portfolio_image.png'), auto;
+}
+
+/* WORK END */
+
+a.Instagram {
+	text-decoration: line-through;
+}
+
+a.Instagram:hover {
+	color: #E1306C;
+}
+
+a.link:hover {
+	color: #0072b1;
+}
+
+a.portfolio_hover {
+	border-bottom: 0.5px solid;
+}
+
+a.portfolio_hover:hover {
+	border-bottom: 2px solid;
+}
+
+/* FOOTER */
+
+#half_left, #half_right {
+	font-size: 0.7em;
+}
+
+#half_left {
+	left: 1em;
+	text-align: left;
+}
+
+#half_right {
+	text-align: right;
+	right: 1em;
+}
+
+/* FOOTER END */
+
+.gradient_color, .gradient_black {
+	position: fixed;
+	bottom: 0em;
+}
+
+.gradient_color {
+	left: 0em;
+	width: 250px;
+	height: 3px;
+	z-index: 3;
+	background: linear-gradient(to right, #FF453AFF, #FF9F0AFF, #FFD60AFF, #30D158FF, #64D2FFFF); /* #0A84FFFF, #5E5CE6FF, #BF5AF2FF, #FF375FFF); */
+}
+
+.gradient_black {
+	right: 0em;
+	width: 100px;
+	height: 3px;
+	background: linear-gradient(to right, white, black);
+}

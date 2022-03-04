@@ -1,0 +1,72 @@
+/* HEADER */
+.header {
+	position: fixed;
+	width: 100%;
+	height: auto;
+	bottom:  0;
+
+	background-color: none;
+	text-align: center;
+	z-index: 2;
+}
+
+.header_title {
+	position: absolute;
+	width: 100%;
+	height: auto;
+	bottom: 0;
+	padding-bottom: 1em;
+	font-size: 1.6em;
+	background-color: black;
+}
+
+.header_ad {
+	position: absolute;
+	bottom: 3.8em;
+	padding-bottom: 0.5em;
+	left: 50%;
+	width: 100%;
+	height: auto;
+	transform: translate(-50%, 0);
+	font-size: 0.9em;
+	background-color: black;
+}
+
+.header_menu {
+	position: absolute;
+	bottom: 4.8em;
+	padding-bottom: 1em;
+	padding-top: 1em;
+	border-top: 0.5px solid white;
+
+	width: 100%;
+	height: auto;
+	background-color: black;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+
+a.menu, a.ad {
+	text-decoration: none;
+	color: grey;
+}
+
+.Instagram:hover {
+	text-decoration: underline 0px !important;
+}
+
+#onglet_actif {
+	border-bottom: 2px solid;
+	color: white;
+}
+
+a:hover {
+	border-bottom: 1px solid;
+	color: white;
+}
+
+/* HEADER END*/
