@@ -244,10 +244,6 @@ span.titre_content {
 	margin: 0;
 }
 
-a.portfolio_hover:hover {
-	cursor: url('/uploads/portfolio_image.png'), auto;
-}
-
 /* WORK END */
 
 a.Instagram {
@@ -258,16 +254,25 @@ a.Instagram:hover {
 	color: #E1306C;
 }
 
+a.Instagram:hover:after {
+	background-color: #E1306C;
+}
+
 a.link:hover {
 	color: #0072b1;
+}
+
+a.link:hover:after {
+	background: #0072b1;
 }
 
 a.portfolio_hover {
 	border-bottom: 0.5px solid;
 }
 
-a.portfolio_hover:hover {
-	border-bottom: 2px solid;
+a.portfolio_hover:hover:after {
+	border-bottom: none;
+	background: white;
 }
 
 /* FOOTER */
