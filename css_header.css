@@ -19,6 +19,16 @@
 	margin-left: 1em;
 }
 
+.header_title_a {
+	display: none;
+}
+
+.title_img {
+	position: absolute;
+	top: 2px;
+	height: 3.7em;
+}
+
 .header_ad {
 	position: absolute;
 	top: 0px;
