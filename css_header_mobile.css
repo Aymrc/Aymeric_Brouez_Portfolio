@@ -1,5 +1,5 @@
 /* HEADER */
-.header {
+/*.header {
 	position: fixed;
 	width: 100%;
 	height: auto;
@@ -7,7 +7,7 @@
 
 	background-color: none;
 	text-align: center;
-	/*transition: bottom 0.3s;*/
+	transition: bottom 0.3s;
 	z-index: 2;
 }
 
@@ -43,6 +43,38 @@
 	width: 100%;
 	height: auto;
 	background-color: black;
+}*/
+
+.header_title_a {
+	display: none;
+}
+
+.header {
+	position: fixed;
+	width: 100%;
+	height: 60px;
+	bottom: 0px;
+	background: black;
+	transition: bottom 0.2s;
+	border-top: 0.8px solid grey;
+	z-index: 10;
+}
+
+.title_img {
+	position: absolute;
+	height: 50px;
+	left: 2vw;
+	bottom: 5px;
+}
+
+.header_ad {
+	display: none;
+}
+
+.header_menu {
+	position: absolute;
+	bottom: 20px;
+	right: 2vw;
 }
 
 .menu {
