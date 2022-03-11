@@ -31,42 +31,6 @@ body {
 }
 
 
-.portfolio_background {
-	position: absolute;
-	top: 10%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-
-	font-family: 'times new roman';
-	font-size: 15vw;
-	color: white;
-	opacity: 0.2;
-
-	z-index: -1;
-}
-
-.gradient_color, .gradient_black {
-	position: fixed;
-	top: 50%;
-}
-
-.gradient_color {
-	left: 0em;
-	width: 3px;
-	height: 250px;
-	z-index: 3;
-	transform: translate(0, -50%);
-	background: linear-gradient(to top, #FF453AFF, #FF9F0AFF, #FFD60AFF, #30D158FF, #64D2FFFF); /* #0A84FFFF, #5E5CE6FF, #BF5AF2FF, #FF375FFF); */
-}
-
-.gradient_black {
-	right: 0em;
-	width: 3px;
-	height: 100px;
-	transform: translate(0, -50%);
-	background: linear-gradient(to top, white, black);
-}
-
 
 /* MAIN */
 .content {

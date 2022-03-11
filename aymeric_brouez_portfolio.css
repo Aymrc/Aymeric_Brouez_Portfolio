@@ -33,7 +33,6 @@ body {
 }
 
 
-
 /*
 .scroll {
 	position: absolute;
@@ -292,23 +291,3 @@ a.portfolio_hover:hover:after {
 }
 
 /* FOOTER END */
-
-.gradient_color, .gradient_black {
-	position: fixed;
-	bottom: 0em;
-}
-
-.gradient_color {
-	left: 0em;
-	width: 250px;
-	height: 3px;
-	z-index: 3;
-	background: linear-gradient(to right, #FF453AFF, #FF9F0AFF, #FFD60AFF, #30D158FF, #64D2FFFF); /* #0A84FFFF, #5E5CE6FF, #BF5AF2FF, #FF375FFF); */
-}
-
-.gradient_black {
-	right: 0em;
-	width: 100px;
-	height: 3px;
-	background: linear-gradient(to right, white, black);
-}
