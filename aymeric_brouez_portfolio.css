@@ -282,7 +282,7 @@ span.titre_content {
     -o-filter:      grayscale(0%);
     opacity: 1;
 
-    transition: 1s;
+    transition: 1.8s;
 }
 
 .gallery_preview:hover .preview_text {
