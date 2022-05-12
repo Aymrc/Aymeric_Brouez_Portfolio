@@ -201,6 +201,11 @@ a.portfolio_hover:hover {
 	cursor: url('uploads/portfolio_image.png'), auto;
 }
 
+.gallery {
+	display: none;
+}
+
+
 /* WORK END */
 
 a.Instagram {

@@ -243,7 +243,99 @@ span.titre_content {
 	margin: 0;
 }
 
+/* gallery */
+
+.gallery {
+	position: relative;
+	margin-top: -15px;
+	padding-bottom: 150px;
+
+	display: grid;
+	top: 0%;
+	width: 70%;
+	height: auto;
+	margin-left: 50%;
+	transform: translate(-50%, 0);
+
+	grid-template-areas: "gallery_preview gallery_preview gallery_preview";
+	grid-template-rows: 600px;
+	grid-template-columns: 1/3;
+}
+
+.gallery_preview {
+	background-color: none;
+
+	filter: none;
+    -webkit-filter: grayscale(100%);
+    -moz-filter:    grayscale(100%);
+    -ms-filter:     grayscale(100%);
+    -o-filter:      grayscale(100%);
+
+  	opacity: 0.3;
+}
+
+.gallery_preview:hover {
+	filter: none;
+    -webkit-filter: grayscale(0%);
+    -moz-filter:    grayscale(0%);
+    -ms-filter:     grayscale(0%);
+    -o-filter:      grayscale(0%);
+    opacity: 1;
+
+    transition: 1s;
+}
+
+.gallery_preview:hover .preview_text {
+	opacity: 1;
+}
+
+.gallery_preview_resize {
+	position: relative;
+	width: 95%;
+	height: 95%;
+	top: 2.5%;
+	left: 2.5%;
+	border: none;
+}
+
+.preview_text {
+	opacity: 0;
+	position: relative;
+	top: 2.5px;
+	left: 5px;
+	mix-blend-mode: difference;
+}
+
+	#preview_one {
+		background-image: url("uploads/archibois.png");
+		background-size: cover;
+	}
+
+	#preview_two {
+		background-image: url("uploads/120H.jpg");
+		background-size: cover;
+	}
+
+	#preview_three {
+		background-image: url("uploads/P45_forest.jpg");
+		background-size: cover;
+	}
+
+a.gallery_title {
+	font-size: 1em;
+	mix-blend-mode: difference;
+}
+
+p.gallery_description {
+	margin-top:  0px;
+	font-size: 0.8em;
+	font-style: italic;
+	font-weight: 100;
+}
+
 /* WORK END */
+
+
 
 a.Instagram {
 	text-decoration: line-through;
