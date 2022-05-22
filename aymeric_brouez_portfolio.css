@@ -282,7 +282,7 @@ span.titre_content {
     -o-filter:      grayscale(0%);
     opacity: 1;
 
-    transition: 1.8s;
+    transition: 2.5s;
 }
 
 .gallery_preview:hover .preview_text {
@@ -314,11 +314,13 @@ span.titre_content {
 	#preview_two {
 		background-image: url("uploads/120H.jpg");
 		background-size: cover;
+		background-position: 80%;
 	}
 
 	#preview_three {
 		background-image: url("uploads/P45_forest.jpg");
 		background-size: cover;
+		background-position: 50%;
 	}
 
 a.gallery_title {
