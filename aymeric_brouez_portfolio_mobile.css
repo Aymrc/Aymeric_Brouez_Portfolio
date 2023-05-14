@@ -6,9 +6,6 @@ Hi, this is my css for my online portfolio. This is hand-made and personnal.
 No copy or reproduction is allowed. If interested in anything, please contact me first.
 */
 
-@import url("css_header_mobile.css");
-@import url("css_hello_world.css");
-
 :root {
 	--textcolor:  white;
 	--background_color: #121212; /* #faf7f1 */
@@ -23,221 +20,65 @@ body {
 	color: var(--textcolor);
 }
 
-.website-counter {
-	position:  aboslute; 
-	top:  0; 
-	left: 0; 
-	color:  var(--background_color);
+p {
+	font-weight: lighter;
+	line-height: 1.5em;
+	font-size: 0.8em;
 }
 
+p2 {
+	opacity: 0.5;
+}
 
+h2{
+	font-size: 1.5em;
+	font-weight: lighter;
+}
 
-/* MAIN */
-.content {
-	position: relative;
-	top: 0px;
-	width: 100%;
+a {
+	opacity: 0.5;
+	text-decoration: none;
+	color: var(--textcolor);
+}
+a:hover {
+	opacity: 1;
+	color: var(--textcolor);
+}
+
+.centered_intro {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40%;
+	transform: translate(-50%, -50%);
 	height: auto;
 	background-color: none;
-
-	font-size: 1em;
+	text-align: center;
 }
 
-		/* sections */
-		.section_1 {
-			position: relative;
-			width: 100%;
-			height: 100vh;
-		}
-
-		.section_2 {
-			position: relative;
-			margin-top: 10vh;
-			width: 100%;
-			height: auto;
-		}
-
-		.section_3 {
-			position: relative;
-			width: 100%;
-			height: auto;
-		}
-
-		.section_4 {
-			position: relative;
-			width: 100%;
-			height: auto;
-			margin-bottom: 20vh;
-		}
-		
-		.section_5_footer {
-			position: relative;
-			width: 100%;
-			height: auto;
-		}
-
-		.section_contact {
-			position: relative;
-			width: 100%;
-			top: 6vh;
-			height: 100%;
-		}
-		/* sections end */
-
-.column_left, .column_right {
-	position: relative;
-	float: left;
-	width: 100%;
+.half {
+	display: inline-block;
+	vertical-align: middle;
 	height: 100%;
 }
 
-.column_left {
-	background-color: none;
+#right {
+	border-top: 1px solid white;
 }
 
-.column_right {
-	background-color: none;
-	padding-bottom: 0vh; /* !!!!!!!!!!!!!!!! */
-}
-
-.content_intro {
+.centered_bot {
 	position: absolute;
-	top: 90%;
+	bottom: 0.1em;
 	left: 50%;
-	width: 80%;
-	transform: translate(-50%, -50%);
-
-	text-align: left;
-}
-
-.content_intro_picture {
-	position: absolute;
-	top: 35%;
-	left: 50%;
-	height: 55%;
+	transform: translate(-50%, 0);
+	height: auto;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 	background-color: none;
-	transform: translate(-50%, -50%);
-	
-	text-align: center;
-	z-index: -2;
+	background-color: none;
 }
 
-.content_title {
-	margin-left: 10vw;
-}
-
-h1 {
-	font-size:  1.8em;
-	font-style: bold;
-}
-
-.content_date, .content_text {
-	height: auto;
-	display: flex;
-	float:  left;
-	width: 80vw;
-	margin-left: 10vw;
-	margin-right: 10vw;
-}
-
-.content_text {
-	margin-top: -1em;
-}
-
-#last {
-	margin-bottom: 18vh;
-}
-
-
-span.titre_content {
-	font-weight: bold;
-}
-
-/* MAIN END*/
-
-/* CONTACT */
-.contact_ad {
+.text_bot {;
 	position: relative;
-	margin-left: 50%;
-	transform: translate(-50%, -50%);
-	width: 80%;
-	height: auto;
-	margin-top: 20vh;
+	float: left;
 }
-
-.contact_adresse {
-	position: relative;
-	width: 40%;
-	margin-top: 15vh;
-	margin-bottom: 20vh;
-	margin-left: 50%;
-	transform: translate(-50%, -50%);
-	height: auto;
-}
-
-/* CONTACT END */
-
-/* WORK */
-
-.WIP {
-	position: relative; 
-	height: 87vh; 
-	text-align: center; 
-	font-size: 1em;
-}
-.WIP_text {
-	position: absolute;
-	top: 50%; 
-	left: 50%; 
-	transform: translate(-50%, -50%);
-}
-
-.pWIP {
-	font-size: 5em;
-	margin: 0;
-}
-
-a.portfolio_hover:hover {
-	cursor: url('uploads/portfolio_image.png'), auto;
-}
-
-.gallery {
-	display: none;
-}
-
-
-/* WORK END */
-
-a.Instagram {
-	text-decoration: line-through;
-}
-
-a.Instagram:hover {
-	color: #E1306C;
-}
-
-a.link:hover {
-	color: #0072b1;
-}
-
-a.portfolio_hover {
-	border-bottom: 0.5px solid;
-}
-
-a.portfolio_hover:hover {
-	border-bottom: 2px solid;
-}
-
-/* FOOTER */
-#half_left {
-	text-align: center;
-	display: none;
-
-}
-
-#half_right {
-	text-align: center;
-	font-size: 0.7em;
-}
-
-/* FOOTER END */
