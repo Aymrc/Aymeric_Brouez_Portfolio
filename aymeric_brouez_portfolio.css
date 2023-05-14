@@ -6,11 +6,6 @@ Hi, this is my css for my online portfolio. This is hand-made and personnal.
 No copy or reproduction is allowed. If interested in anything, please contact me first.
 */
 
-
-
-@import url("css_header.css");
-@import url("css_hello_world.css");
-
 :root {
 	--textcolor:  white;
 	--background_color: #121212; /* #faf7f1 */
@@ -25,363 +20,71 @@ body {
 	color: var(--textcolor);
 }
 
-.website-counter {
-	position:  aboslute; 
-	top:  0; 
-	left: 0; 
-	color:  var(--background_color);
+p {
+	font-weight: lighter;
+	line-height: 1.5em;
 }
 
+p2 {
+	opacity: 0.5;
+}
 
-/*
-.scroll {
+h2{
+	font-size: 2em;
+	font-weight: lighter;
+}
+
+a {
+	opacity: 0.5;
+	text-decoration: none;
+	color: var(--textcolor);
+}
+a:hover {
+	opacity: 1;
+	color: var(--textcolor);
+}
+
+.centered_intro {
 	position: absolute;
-	bottom: 2em;
-	left: 0em;
-	border-left: 3px solid black;
-	transform: rotate(-90deg);
-}*/
-
-.scroll {
-	position: absolute;
-	left: 2.5em;
-	bottom: 4.5em;
-}
-
-.scroll_down_text {
-	display: inline-block;
-	transform: rotate(-45deg);
-	left: 0px;
-}
-
-p.scroll_text {
-	border-left: 1px solid var(--textcolor);
-	width: 2em;
-	height: 2em;
-	border-left-width: 5px;
-	border-bottom: 1px solid var(--textcolor);
-	border-bottom-width: 5px;
-	animation: scroll_animation 1.5s linear infinite;
-	transform: rotate(-45deg);
-}
-
-@keyframes scroll_animation {
-	0% {transform: translate(0px);}
-	50% {transform: translate(-3em, 3em);}
-	100% {transform: translate(0px);}
-}
-
-
-.portfolio_background {
-	position: absolute;
-	top: 25%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-
-	font-family: 'times new roman';
-	font-size: 12vw;
-	color: white;
-	opacity: 0.2;
-
-	z-index: -1;
-}
-
-
-/* MAIN */
-.content {
-	position: relative;
-	top: 0px;
-	width: 100%;
 	height: auto;
 	background-color: none;
-
-	font-size: 1.3em;
 }
 
-		/* sections */
-		.section_1 {
-			position: relative;
-			left: 50%;
-			width: 50%;
-			height: 100vh;
-		}
+.half {
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+	padding: 0.5em;
+}
 
-		.section_2 {
-			position: relative;
-			width: 100%;
-			height: auto;
-		}
+#left {
+	text-align: right;
+}
 
-		.section_3 {
-			position: relative;
-			width: 100%;
-			height: auto;
-		}
+#right {
+	text-align: left;
+}
 
-		.section_4 {
-			position: relative;
-			width: 100%;
-			height: auto;
-		}
+#right {
+	border-left: 1px solid white;
+}
 
-		.section_5_footer {
-			position: relative;
-			width: 100%;
-			height: auto;
-		}
+.centered_bot {
+	position: absolute;
+	bottom: 0.1em;
+	left: 50%;
+	transform: translate(-50%, 0);
+	height: auto;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	background-color: none;
+	background-color: none;
+}
 
-		.section_contact {
-			position: relative;
-			width: 100%;
-			top: 6vh;
-			height: 94vh;
-		}
-		/* sections end */
-
-.column_left, .column_right {
+.text_bot {;
 	position: relative;
 	float: left;
-	width: 50%;
-	height: 100%;
 }
-
-.column_left {
-	background-color: none;
-}
-
-.column_right {
-	background-color: none;
-}
-
-.content_intro {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 50%;
-	transform: translate(-50%, -50%);
-
-	text-align: left;
-}
-
-.content_intro_picture {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	height: 55%;
-	background-color: none;
-	transform: translate(-50%, -50%);
-	
-	text-align: center;
-}
-
-.content_title {
-	margin-left: 3em;
-}
-
-h1 {
-	font-size:  1.8em;
-	font-style: bold;
-}
-
-.content_date, .content_text {
-	height: 5.5em;
-	display: flex;
-	float:  left;
-}
-.content_date {
-	width: 20%;
-}
-
-.content_text {
-	width: 80%;
-}
-
-span.titre_content {
-	font-weight: bold;
-}
-
-/* MAIN END*/
-
-/* CONTACT */
-.contact_ad {
-	position: absolute;
-	width: 80%;
-	height: auto;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.contact_adresse {
-	position: absolute;
-	width: 40%;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	height: auto;
-}
-
-/* CONTACT END */
-
-/* WORK */
-
-.WIP {
-	position: relative; 
-	height: 94vh; 
-	text-align: center; 
-	font-size: 1em;
-}
-.WIP_text {
-	position: absolute;
-	top: 50%; 
-	left: 50%; 
-	transform: translate(-50%, -50%);
-}
-
-.pWIP {
-	font-size: 5em;
-	margin: 0;
-}
-
-/* gallery */
-
-.gallery {
-	position: relative;
-	margin-top: -15px;
-	padding-bottom: 150px;
-
-	display: grid;
-	top: 0%;
-	width: 70%;
-	height: auto;
-	margin-left: 50%;
-	transform: translate(-50%, 0);
-
-	grid-template-areas: "gallery_preview gallery_preview gallery_preview";
-	grid-template-rows: 600px;
-	grid-template-columns: 1/3;
-}
-
-.gallery_preview {
-	background-color: none;
-
-	filter: none;
-    -webkit-filter: grayscale(100%);
-    -moz-filter:    grayscale(100%);
-    -ms-filter:     grayscale(100%);
-    -o-filter:      grayscale(100%);
-
-  	opacity: 0.3;
-}
-
-.gallery_preview:hover {
-	filter: none;
-    -webkit-filter: grayscale(0%);
-    -moz-filter:    grayscale(0%);
-    -ms-filter:     grayscale(0%);
-    -o-filter:      grayscale(0%);
-    opacity: 1;
-
-    transition: 2.5s;
-}
-
-.gallery_preview:hover .preview_text {
-	opacity: 1;
-}
-
-.gallery_preview_resize {
-	position: relative;
-	width: 95%;
-	height: 95%;
-	top: 2.5%;
-	left: 2.5%;
-	border: none;
-}
-
-.preview_text {
-	opacity: 0;
-	position: relative;
-	top: 2.5px;
-	left: 5px;
-	mix-blend-mode: difference;
-}
-
-	#preview_one {
-		background-image: url("uploads/archibois.jpg");
-		background-size: cover;
-	}
-
-	#preview_two {
-		background-image: url("uploads/120H.jpg");
-		background-size: cover;
-		background-position: 80%;
-	}
-
-	#preview_three {
-		background-image: url("uploads/P45_forest.jpg");
-		background-size: cover;
-		background-position: 50%;
-	}
-
-a.gallery_title {
-	font-size: 1em;
-	mix-blend-mode: difference;
-}
-
-p.gallery_description {
-	margin-top:  0px;
-	font-size: 0.8em;
-	font-style: italic;
-	font-weight: 100;
-}
-
-/* WORK END */
-
-
-
-a.Instagram {
-	text-decoration: line-through;
-}
-
-a.Instagram:hover {
-	color: #E1306C;
-}
-
-a.Instagram:hover:after {
-	background-color: #E1306C;
-}
-
-a.link:hover {
-	color: #0072b1;
-}
-
-a.link:hover:after {
-	background: #0072b1;
-}
-
-a.portfolio_hover {
-	border-bottom: 0.5px solid;
-}
-
-a.portfolio_hover:hover:after {
-	border-bottom: none;
-	background: white;
-}
-
-/* FOOTER */
-
-#half_left, #half_right {
-	font-size: 0.7em;
-}
-
-#half_left {
-	left: 1em;
-	text-align: left;
-}
-
-#half_right {
-	text-align: right;
-	right: 1em;
-}
-
-/* FOOTER END */
