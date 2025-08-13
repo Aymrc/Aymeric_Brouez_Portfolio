@@ -2,10 +2,10 @@
 
 /* --- VARIABLES --- */
 :root{
-  --bg-color: #e0e0e0;
+  --bg-color: #cecece;
   --pill-background: #222;
   --txt-color: #ffffff;
-  --shadow: 6px 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow: 7px 5px 9px rgba(0, 0, 0, 0.23);
 
   --accent-color: #ff9a4d; /* fallback of JS */
   --on-accent: #000;
@@ -13,16 +13,26 @@
   --pill-radius: 8px;
   --pill-font-size: 14px;
   --pill-padding-updown: 10px;
-  --pill-padding-global: var(--pill-padding-updown) 12px var(--pill-padding-updown) 12px;
+  --pill-padding-sides: calc(var(--pill-padding-updown) - 2px);
+  --pill-padding-global: var(--pill-padding-updown) var(--pill-padding-sides) var(--pill-padding-updown) var(--pill-padding-sides);
   --pill-height: calc(var(--pill-font-size) + var(--pill-padding-updown) * 2);
   --pill-portrait: calc(var(--pill-font-size) + var(--pill-padding-updown) * 2);
-  --pil-gap: 4px;
+  --pil-gap: 5px;
 }
 
-.accent-text { color: var(--accent-color); }
-.pill.accent-border { box-shadow: 0 6px 16px rgba(0,0,0,.15); border: 1px solid var(--accent-color); }
-.accent-chip { background: var(--accent-color); color: var(--on-accent); }
+.accent-text {
+  color: var(--accent-color);
+}
 
+.pill.accent-border {
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  border: 1px solid var(--accent-color);
+}
+
+.accent-chip {
+  background: var(--accent-color);
+  color: var(--on-accent);
+}
 
 * {
   cursor: default;
@@ -41,6 +51,12 @@ body {
   font-weight: 100;
 }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .main-bar {
   display: flex;
   align-items: center;
@@ -48,7 +64,7 @@ body {
 }
 
 .pill {
-  background-color: rgb(42, 42, 42);
+  background-color: var(--bg-color);
   color: var(--txt-color);
   padding: var(--pill-padding-global);
   border-radius: 8px;
@@ -69,6 +85,7 @@ body {
   align-items: center;
   justify-content: center;
   border: 1px solid var(--accent-color);
+  box-shadow: var(--shadow);
 }
 
 .profile-img img {
@@ -81,7 +98,7 @@ body {
 
 /* ID customization */
 #chat {
-  width: 200px;
+  width: 250px;
   background-color: var(--pill-background);
 
   cursor: text;
@@ -114,13 +131,13 @@ body {
 .material-symbols-outlined.icon {
   font-size: var(--pill-font-size);
   line-height: 1;
-  margin-right: 8px;
+  margin-right: calc(var(--pill-padding-sides) - 2px);
   vertical-align: middle;
 }
 
 /* preview pill */
 #preview {
-  width: 40px;
+  width: 60px;
   overflow: hidden;
   background-color: var(--pill-background);
 }
@@ -144,3 +161,30 @@ body {
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
 }
+
+
+
+
+/* --------- Elevator speech --------- */
+/*
+.tech{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing: 0.01em;
+}
+
+/* handwriting look for “creativity”
+:root {
+  --scribble-scale: 1.8;     /* tweak this 1.5–2.2 as you like
+  --scribble-baseline: -0.08em; /* vertical nudge to align baseline
+}
+
+/* .scribble {
+  font-family: "Reenie Beanie", cursive;
+  font-weight: 800; /* Reenie Beanie is single-weight 
+  font-size: calc(1em * var(--scribble-scale));
+  line-height: 1;
+  letter-spacing: 0.01em;
+  display: inline-block; /* needed so the baseline nudge works
+  transform: translateY(2px);
+  -webkit-font-smoothing: antialiased;
+} */

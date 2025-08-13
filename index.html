@@ -4,30 +4,43 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="assets/icon.png">
+	
 	<title>Aymeric Brouez</title>
 
 	<link rel="stylesheet" href="style.css">
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
+	
+	<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap" rel="stylesheet"> -->
 </head>
 
 <body>
 
-	<div class="main-bar">
-		<div class="profile-img">
-			<img src="assets/profile-picture.png" alt="Preview">
-		</div>
-		<div class="pill" id="dropdown">
-			<span class="material-symbols-outlined icon">menu</span>
-			<strong>Aymeric Brouez</strong>&nbsp;/ home
-		</div>
-		<div class="pill" id="chat">| Ask me about my work...</div>
-		<div class="pill" id="preview">
-			<span class="ghost">Aa</span>
-			<img src="assets/work/genAI.png" alt="Preview">
+	<div class="main-container">
+		<div class="main-bar">
+			<div class="profile-img">
+				<img src="assets/profile-picture.png" alt="Preview">
+			</div>
+			<div class="pill" id="dropdown">
+				<span class="material-symbols-outlined icon">menu</span>
+				<strong>Aymeric Brouez</strong>&nbsp;/ home
+			</div>
+			<div class="pill" id="chat">| Ask me about my work...</div>
+			
+			<div class="pill" id="preview">
+				<span class="ghost">Aa</span>
+				<img class="preview-back" src="assets/work/genAI-two.png" alt="Previous work">
+				<img class="preview-front" src="assets/work/genAI-one.png" alt="Preview">
+			</div>
 		</div>
 
+		<!-- <div class="elevator-speech">
+			<p class="lead"><strong>Fuelling <span class="accent-text scribble">creativity</span> with <span class="tech">technology</span>.</strong></p>
+			<p class="sub"><strong>help design studios integrate digital into their workflow.</strong></p>
+		</div> -->
 	</div>
 
 	<script type="module" src="app.js"></script>
