@@ -119,49 +119,55 @@ function setupDropdown() {
 
 // --- chat panel (upward history) — draggable slider ---
 function setupChatPanel() {
-  const shell = document.querySelector('.chat-shell');
+  const shell    = document.querySelector('.chat-shell');
   if (!shell) return;
 
   const handle   = shell.querySelector('.chat-handle');
   const backdrop = shell.querySelector('.chat-backdrop');
-  const chat     = shell.querySelector('#chat');
   if (!handle || !backdrop) return;
 
-  // read CSS vars (px)
-  const css = getComputedStyle(document.documentElement);
+  // read CSS vars
+  const css  = getComputedStyle(document.documentElement);
   const minH = parseFloat(css.getPropertyValue('--chat-min-h')) || 0;
   const maxH = parseFloat(css.getPropertyValue('--chat-max-h')) || 220;
   const step = 10;
 
-  // state
+  // --- state
   let startY = 0;
   let startH = minH;
   let dragging = false;
+  let dragMoved = false;
+  let suppressClick = false;
 
-  // helpers
+  // --- helpers
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-
   const setHeight = (h, announce = true) => {
     const clamped = clamp(h, minH, maxH);
-    backdrop.style.height = clamped + 'px';
-    shell.classList.toggle('expanded', clamped > minH + 1);
-    // ARIA slider values (0–100 scale)
+    backdrop.style.height = clamped + 'px'; // keep result
+    shell.style.setProperty('--chat-h', clamped + 'px'); // move handle with top
+    shell.classList.toggle('expanded', clamped > minH + 1); // only for overflow
     const pct = Math.round(((clamped - minH) / (maxH - minH)) * 100);
     handle.setAttribute('aria-valuenow', String(pct));
     if (announce) handle.setAttribute('aria-expanded', String(clamped > minH));
   };
 
+  // seed height and handle position
+  setHeight(minH);
+
+  // --- dragging
   const beginDrag = (clientY) => {
     dragging = true;
+    dragMoved = false;
     shell.classList.add('dragging');
     startY = clientY;
     startH = backdrop.getBoundingClientRect().height;
-    handle.setPointerCapture?.(lastPointerId);
+    document.body.style.userSelect = 'none';
   };
 
   const moveDrag = (clientY) => {
     if (!dragging) return;
-    const dy = startY - clientY; // dragging up increases height
+    const dy = startY - clientY; // drag up => taller
+    if (Math.abs(dy) > 2) dragMoved = true;
     setHeight(startH + dy, false);
   };
 
@@ -169,23 +175,20 @@ function setupChatPanel() {
     if (!dragging) return;
     dragging = false;
     shell.classList.remove('dragging');
+    document.body.style.userSelect = '';
+    suppressClick = dragMoved; // ignore the click that follows a drag
   };
 
-  // pointer tracking
-  let lastPointerId = null;
-
   handle.addEventListener('pointerdown', (e) => {
-    lastPointerId = e.pointerId;
     handle.setPointerCapture?.(e.pointerId);
     beginDrag(e.clientY);
     e.preventDefault();
   });
-
   window.addEventListener('pointermove', (e) => moveDrag(e.clientY));
-  window.addEventListener('pointerup',   endDrag);
+  window.addEventListener('pointerup', endDrag);
   window.addEventListener('pointercancel', endDrag);
 
-  // keyboard slider (Up/Down/PageUp/PageDown/Home/End)
+  // keyboard slider
   handle.addEventListener('keydown', (e) => {
     const hNow = parseFloat(backdrop.style.height || minH) || minH;
     let h = hNow;
@@ -203,36 +206,21 @@ function setupChatPanel() {
     e.preventDefault();
   });
 
-  // optional: click to toggle min/max quickly
+
   handle.addEventListener('click', (e) => {
-    if (dragging) return; // ignore click after a drag
-    const hNow = parseFloat(backdrop.style.height || minH) || minH;
-    const target = hNow <= minH + 1 ? maxH : minH;
-    setHeight(target);
-    e.preventDefault();
+    if (suppressClick) { suppressClick = false; e.preventDefault(); }
   });
 
-  // optionally let clicking the chat pill open to a comfy height
-  if (chat) {
-    chat.addEventListener('click', () => {
-      const hNow = parseFloat(backdrop.style.height || minH) || minH;
-      const mid = Math.min(maxH, Math.max(minH + 40, (minH + maxH) / 1.4));
-      setHeight(hNow <= minH + 1 ? mid : minH);
-    });
-  }
-
-  // init
+  // ARIA
   handle.setAttribute('role', 'slider');
   handle.setAttribute('aria-orientation', 'vertical');
   handle.setAttribute('aria-valuemin', '0');
   handle.setAttribute('aria-valuemax', '100');
   handle.setAttribute('tabindex', '0');
-  setHeight(minH);
 }
 
 // ---------- boot ----------
 function wireUp() {
-  // preview/accent (guarded)
   const preview = document.getElementById('preview');
   if (preview) {
     preview.querySelectorAll('img').forEach(i => (i.crossOrigin = 'anonymous'));
