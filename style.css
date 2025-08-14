@@ -1,13 +1,13 @@
-/* style.css */
-
-/* --- VARIABLES --- */
+/* =========================
+        VARIABLES
+========================= */
 :root{
   --bg-color: #cecece;
   --pill-background: #222;
   --txt-color: #ffffff;
   --shadow: 7px 5px 9px rgba(0, 0, 0, 0.23);
 
-  --accent-color: #ff9a4d; /* fallback of JS */
+  --accent-color: #ffa73a; /* fallback of JS */
   --on-accent: #000;
 
   --pill-radius: 8px;
@@ -20,26 +20,12 @@
   --pil-gap: 5px;
 }
 
-.accent-text {
-  color: var(--accent-color);
-}
 
-.pill.accent-border {
-  box-shadow: 0 6px 16px rgba(0,0,0,.15);
-  border: 1px solid var(--accent-color);
-}
+/* =========================
+            BASE
+========================= */
+* { cursor: default; }
 
-.accent-chip {
-  background: var(--accent-color);
-  color: var(--on-accent);
-}
-
-* {
-  cursor: default;
-}
-
-
-/* --- CODE --- */
 body {
   margin: 0;
   height: 100vh;
@@ -51,6 +37,10 @@ body {
   font-weight: 100;
 }
 
+
+/* =========================
+          LAYOUT
+========================= */
 .main-container {
   display: flex;
   flex-direction: column;
@@ -63,18 +53,27 @@ body {
   gap: var(--pil-gap);
 }
 
+
+/* =========================
+            PILL
+========================= */
 .pill {
-  background-color: var(--bg-color);
+  background-color: var(--pill-background);
   color: var(--txt-color);
   padding: var(--pill-padding-global);
-  border-radius: 8px;
+  border-radius: var(--pill-radius);
   font-size: var(--pill-font-size);
+  line-height: 1;
   display: flex;
   align-items: center;
+  position: relative;
   box-shadow: var(--shadow);
 }
 
-/* Profile picture */
+
+/* =========================
+        PROFILE IMAGE
+========================= */
 .profile-img {
   width: var(--pill-height);
   height: var(--pill-height);
@@ -96,32 +95,19 @@ body {
 }
 
 
-/* ID customization */
-#chat {
-  width: 250px;
-  background-color: var(--pill-background);
-
-  cursor: text;
-}
-
-/* Pill Preview */
-.pill {
-  background-color: rgb(42, 42, 42);
-  color: var(--txt-color);
-  padding: var(--pill-padding-global);
-  border-radius: var(--pill-radius);
-  font-size: var(--pill-font-size);
-  line-height: 1;
-  display: flex;
-  align-items: center;
+/* =========================
+          DROPDOWN
+========================= */
+/* structure */
+.dropdown {
   position: relative;
+  display: inline-block;
 }
 
-/* Dropdown */
-#dropdown,
-#dropdown * {
-  cursor: pointer;
-}
+#dropdown { min-width: 180px; }
+
+/* trigger visuals */
+#dropdown, #dropdown * { cursor: pointer; }
 
 #dropdown strong {
   font-weight: 500;
@@ -135,20 +121,182 @@ body {
   vertical-align: middle;
 }
 
-/* preview pill */
+/* submenu (animated) */
+.submenu {
+  position: absolute;
+  top: calc(100% + 0px);
+  left: 0;
+  width: 100%;
+  background: var(--pill-background);
+  border-radius: var(--pill-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  z-index: 10;
+  font-size: var(--pill-font-size);
+
+  /* animation */
+  transform-origin: top;
+  transform: scaleY(0.96) translateY(-2px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  /* transitions  open & close */
+  transition:
+    transform 380ms cubic-bezier(.22,.7,.18,1),
+    opacity 320ms cubic-bezier(.22,.7,.18,1),
+    visibility 0ms linear 260ms;
+  will-change: transform, opacity;
+}
+
+/* open states */
+.dropdown:hover .submenu,
+.dropdown:focus-within .submenu,
+.dropdown.open .submenu {
+  transform: scaleY(1) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    transform 380ms cubic-bezier(.22,.7,.18,1),
+    opacity 320ms cubic-bezier(.22,.7,.18,1),
+    visibility 0ms;
+}
+
+/* items */
+.submenu a {
+  display: block;
+  padding: var(--pill-padding-global);
+  padding-left: 115px; /* align with parent text */
+  color: var(--txt-color);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.submenu a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .submenu {
+    transition: none;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+
+
+/* =========================
+          CHAT LLM
+========================= */
+#chat {
+  position: relative;
+  width: 250px;
+  background-color: var(--pill-background);
+  cursor: text;
+}
+
+.chat-shell {
+  position: relative;
+  z-index: 1;
+}
+
+#chat .caret {
+  display: inline-block;
+  width: 1ch;
+  color: var(--txt-color);
+  font-family: monospace;
+}
+
+#chat .caret::after {
+  content: '|';
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* =========================
+    CHAT PANEL (history)
+========================= */
+:root {
+  --chat-min-h: 30px; /* collapsed */
+  --chat-max-h: 130px; /* expanded */
+  --chat-overlap: calc(var(--pill-height) / 2); /* how far under the pill it sits */
+}
+
+.chat-shell {
+  position: relative;
+  display: inline-block;
+}
+
+/* history panel */
+.chat-backdrop {
+  position: absolute;
+  bottom: calc(100% - var(--chat-overlap));
+  left: 0;
+  width: 100%;
+  height: var(--chat-min-h);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-bottom: none;
+  border-radius: var(--pill-radius) var(--pill-radius) 0 0;
+  box-shadow: 7px 3px 9px rgba(0,0,0,.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  z-index: -1;
+  transition: height 280ms cubic-bezier(.22,.7,.18,1);
+}
+
+/* handle */
+.chat-handle {
+  position: absolute;
+  bottom: calc(100% + 6px); /* above the pill */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  cursor: ns-resize;
+  user-select: none;
+  touch-action: none;
+  z-index: 1;
+}
+
+/* expanded state */
+.chat-shell.expanded .chat-backdrop {
+  height: var(--chat-max-h);
+  transition: none;
+  overflow: auto;
+}
+
+
+
+/* =========================
+          PREVIEW
+========================= */
 #preview {
   width: 60px;
   overflow: hidden;
   background-color: var(--pill-background);
 }
 
-/* invisible text used for padding height */
 #preview .ghost {
   visibility: hidden;
   pointer-events: none;
 }
 
-/* image fills pill */
 #preview img {
   position: absolute;
   inset: 0;
@@ -157,15 +305,30 @@ body {
   object-fit: cover;
   border-radius: inherit;
   display: block;
-
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
 }
 
 
+/* =========================
+          HELPERS
+========================= */
+.accent-text { color: var(--accent-color); }
+
+.pill.accent-border {
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  border: 1px solid var(--accent-color);
+}
+
+.accent-chip {
+  background: var(--accent-color);
+  color: var(--on-accent);
+}
 
 
-/* --------- Elevator speech --------- */
+/* =========================
+   PLAYGROUND (optional)
+========================= */
 /*
 .tech{
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -178,13 +341,14 @@ body {
   --scribble-baseline: -0.08em; /* vertical nudge to align baseline
 }
 
-/* .scribble {
+.scribble {
   font-family: "Reenie Beanie", cursive;
-  font-weight: 800; /* Reenie Beanie is single-weight 
+  font-weight: 800; /* Reenie Beanie is single-weight
   font-size: calc(1em * var(--scribble-scale));
   line-height: 1;
   letter-spacing: 0.01em;
   display: inline-block; /* needed so the baseline nudge works
   transform: translateY(2px);
   -webkit-font-smoothing: antialiased;
-} */
+}
+*/

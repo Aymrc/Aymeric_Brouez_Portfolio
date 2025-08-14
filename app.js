@@ -75,10 +75,7 @@ function getActivePreviewImg() {
 function recomputeAccent() {
   const img = getActivePreviewImg();
   if (!img) return;
-
-  // allow cross-origin if server sends CORS headers
   img.crossOrigin = 'anonymous';
-
   if (img.complete && img.naturalWidth) {
     try {
       setAccent(getAccentColorFromImage(img));
@@ -90,32 +87,176 @@ function recomputeAccent() {
   }
 }
 
-function wireUp() {
-  const preview = document.getElementById('preview');
-  if (!preview) return;
+// --- dropdown: click/touch + escape support ---
+function setupDropdown() {
+  const wrapper = document.querySelector('.dropdown');
+  const trigger = document.getElementById('dropdown');
+  const submenu = wrapper ? wrapper.querySelector('.submenu') : null;
+  if (!wrapper || !trigger || !submenu) return;
 
-  // set crossOrigin on any existing images
-  preview.querySelectorAll('img').forEach(i => (i.crossOrigin = 'anonymous'));
+  const open = () => {
+    wrapper.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+  };
+  const close = () => {
+    wrapper.classList.remove('open');
+    trigger.setAttribute('aria-expanded', 'false');
+  };
 
-  // initial compute
-  recomputeAccent();
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    wrapper.classList.contains('open') ? close() : open();
+  });
 
-  // re-run when images change (src swap, class front/back, or DOM changes)
-  const mo = new MutationObserver((mutations) => {
-    mutations.forEach(m => {
-      if (m.type === 'childList') {
-        m.addedNodes.forEach(n => { if (n.tagName === 'IMG') n.crossOrigin = 'anonymous'; });
-      }
+  document.addEventListener('click', (e) => {
+    if (!wrapper.contains(e.target)) close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+}
+
+// --- chat panel (upward history) — draggable slider ---
+function setupChatPanel() {
+  const shell = document.querySelector('.chat-shell');
+  if (!shell) return;
+
+  const handle   = shell.querySelector('.chat-handle');
+  const backdrop = shell.querySelector('.chat-backdrop');
+  const chat     = shell.querySelector('#chat');
+  if (!handle || !backdrop) return;
+
+  // read CSS vars (px)
+  const css = getComputedStyle(document.documentElement);
+  const minH = parseFloat(css.getPropertyValue('--chat-min-h')) || 0;
+  const maxH = parseFloat(css.getPropertyValue('--chat-max-h')) || 220;
+  const step = 10;
+
+  // state
+  let startY = 0;
+  let startH = minH;
+  let dragging = false;
+
+  // helpers
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+  const setHeight = (h, announce = true) => {
+    const clamped = clamp(h, minH, maxH);
+    backdrop.style.height = clamped + 'px';
+    shell.classList.toggle('expanded', clamped > minH + 1);
+    // ARIA slider values (0–100 scale)
+    const pct = Math.round(((clamped - minH) / (maxH - minH)) * 100);
+    handle.setAttribute('aria-valuenow', String(pct));
+    if (announce) handle.setAttribute('aria-expanded', String(clamped > minH));
+  };
+
+  const beginDrag = (clientY) => {
+    dragging = true;
+    shell.classList.add('dragging');
+    startY = clientY;
+    startH = backdrop.getBoundingClientRect().height;
+    handle.setPointerCapture?.(lastPointerId);
+  };
+
+  const moveDrag = (clientY) => {
+    if (!dragging) return;
+    const dy = startY - clientY; // dragging up increases height
+    setHeight(startH + dy, false);
+  };
+
+  const endDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    shell.classList.remove('dragging');
+  };
+
+  // pointer tracking
+  let lastPointerId = null;
+
+  handle.addEventListener('pointerdown', (e) => {
+    lastPointerId = e.pointerId;
+    handle.setPointerCapture?.(e.pointerId);
+    beginDrag(e.clientY);
+    e.preventDefault();
+  });
+
+  window.addEventListener('pointermove', (e) => moveDrag(e.clientY));
+  window.addEventListener('pointerup',   endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
+  // keyboard slider (Up/Down/PageUp/PageDown/Home/End)
+  handle.addEventListener('keydown', (e) => {
+    const hNow = parseFloat(backdrop.style.height || minH) || minH;
+    let h = hNow;
+    switch (e.key) {
+      case 'ArrowUp':   h = hNow + step; break;
+      case 'ArrowDown': h = hNow - step; break;
+      case 'PageUp':    h = hNow + step * 3; break;
+      case 'PageDown':  h = hNow - step * 3; break;
+      case 'Home':      h = minH; break;
+      case 'End':       h = maxH; break;
+      case 'Escape':    h = minH; break;
+      default: return;
+    }
+    setHeight(h);
+    e.preventDefault();
+  });
+
+  // optional: click to toggle min/max quickly
+  handle.addEventListener('click', (e) => {
+    if (dragging) return; // ignore click after a drag
+    const hNow = parseFloat(backdrop.style.height || minH) || minH;
+    const target = hNow <= minH + 1 ? maxH : minH;
+    setHeight(target);
+    e.preventDefault();
+  });
+
+  // optionally let clicking the chat pill open to a comfy height
+  if (chat) {
+    chat.addEventListener('click', () => {
+      const hNow = parseFloat(backdrop.style.height || minH) || minH;
+      const mid = Math.min(maxH, Math.max(minH + 40, (minH + maxH) / 1.4));
+      setHeight(hNow <= minH + 1 ? mid : minH);
     });
-    recomputeAccent();
-  });
+  }
 
-  mo.observe(preview, {
-    subtree: true,
-    childList: true,
-    attributes: true,
-    attributeFilter: ['src', 'class']
-  });
+  // init
+  handle.setAttribute('role', 'slider');
+  handle.setAttribute('aria-orientation', 'vertical');
+  handle.setAttribute('aria-valuemin', '0');
+  handle.setAttribute('aria-valuemax', '100');
+  handle.setAttribute('tabindex', '0');
+  setHeight(minH);
+}
+
+// ---------- boot ----------
+function wireUp() {
+  // preview/accent (guarded)
+  const preview = document.getElementById('preview');
+  if (preview) {
+    preview.querySelectorAll('img').forEach(i => (i.crossOrigin = 'anonymous'));
+    recomputeAccent();
+
+    const mo = new MutationObserver((mutations) => {
+      mutations.forEach(m => {
+        if (m.type === 'childList') {
+          m.addedNodes.forEach(n => { if (n.tagName === 'IMG') n.crossOrigin = 'anonymous'; });
+        }
+      });
+      recomputeAccent();
+    });
+
+    mo.observe(preview, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ['src', 'class']
+    });
+  }
+
+  setupDropdown();
+  setupChatPanel();
 }
 
 document.addEventListener('DOMContentLoaded', wireUp);

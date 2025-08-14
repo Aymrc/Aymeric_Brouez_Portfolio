@@ -21,20 +21,52 @@
 
 	<div class="main-container">
 		<div class="main-bar">
+
 			<div class="profile-img">
 				<img src="assets/profile-picture.png" alt="Preview">
 			</div>
-			<div class="pill" id="dropdown">
-				<span class="material-symbols-outlined icon">menu</span>
-				<strong>Aymeric Brouez</strong>&nbsp;/ home
+
+			<div class="dropdown">
+				<div class="pill" id="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<span class="material-symbols-outlined icon">menu</span>
+					<strong>Aymeric Brouez</strong>&nbsp;/ home
+				</div>
+
+				<nav class="submenu" role="menu" aria-label="Site sections">
+					<a href="/about.html" role="menuitem">... / about</a>
+					<a href="/contact.html" role="menuitem">... / contact</a>
+					<!-- more pages to come -->
+				</nav>
 			</div>
-			<div class="pill" id="chat">| Ask me about my work...</div>
+
+			<!-- <div class="pill" id="chat">
+				<span class="caret"></span>Ask me about my work...
+			</div> -->
+			<div class="chat-shell">
+			<!-- frosted glass history panel -->
+				<div class="chat-backdrop" id="chat-history">
+					<!-- future chat history -->
+				</div>
+
+				<!-- grab handle -->
+				<button class="chat-handle" type="button" aria-controls="chat-history"
+						role="slider" aria-orientation="vertical" aria-valuemin="0"
+						aria-valuemax="100" aria-valuenow="0" tabindex="0">
+				</button>
+
+
+			<!-- chat pill -->
+			<div id="chat" class="pill">
+				<span class="caret"></span>Ask me about my work
+			</div>
+			</div>
 			
 			<div class="pill" id="preview">
 				<span class="ghost">Aa</span>
 				<img class="preview-back" src="assets/work/genAI-two.png" alt="Previous work">
 				<img class="preview-front" src="assets/work/genAI-one.png" alt="Preview">
 			</div>
+
 		</div>
 
 		<!-- <div class="elevator-speech">
