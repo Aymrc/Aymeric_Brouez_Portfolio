@@ -19,6 +19,37 @@ function rgbToHsl(r, g, b) {
   return [h, s, l];
 }
 
+function hslToRgb(h, s, l) {
+  const hue2rgb = (p, q, t) => {
+    if (t < 0) t += 1; if (t > 1) t -= 1;
+    if (t < 1/6) return p + (q - p) * 6 * t;
+    if (t < 1/2) return q;
+    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    return p;
+  };
+  let r, g, b;
+  if (s === 0) { r = g = b = l; }
+  else {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1/3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1/3);
+  }
+  return [Math.round(r*255), Math.round(g*255), Math.round(b*255)];
+}
+
+// make the picked color "pop"
+function popAccent(cssColor, { minS = 0.7, targetL = 0.68, strength = 0.5 } = {}) { // minS = saturation / targetL =  brightness / strenght = agressivity
+  const [r, g, b] = cssColor.match(/\d+/g).map(Number);
+  let [h, s, l] = rgbToHsl(r, g, b);
+  s = Math.max(s, minS); // ensure better saturation
+  l = l + (targetL - l) * strength; // ease lightness toward more punchy mid
+  const [R, G, B] = hslToRgb(h, s, l);
+  return `rgb(${R}, ${G}, ${B})`;
+}
+
+
 function getAccentColorFromImage(imgEl) {
   const c = document.createElement('canvas');
   const ctx = c.getContext('2d', { willReadFrequently: true });
@@ -57,8 +88,10 @@ function getAccentColorFromImage(imgEl) {
 }
 
 function setAccent(cssColor) {
-  document.documentElement.style.setProperty('--accent-color', cssColor);
-  const [r,g,b] = cssColor.match(/\d+/g).map(Number);
+  const punchy = popAccent(cssColor);
+  document.documentElement.style.setProperty('--accent-color', punchy);
+
+  const [r,g,b] = punchy.match(/\d+/g).map(Number);
   const lum = (0.2126*r + 0.7152*g + 0.0722*b) / 255;
   document.documentElement.style.setProperty('--on-accent', lum > 0.55 ? 'rgba(0,0,0,.85)' : '#fff');
 }
