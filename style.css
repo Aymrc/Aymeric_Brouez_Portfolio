@@ -81,15 +81,15 @@ body {
         PROFILE IMAGE
 ========================= */
 .profile-img {
-  width: var(--pill-height);
-  height: var(--pill-height);
+  width: calc(var(--pill-height) - 1.5px);
+  height: calc(var(--pill-height) - 1.5px);
   border-radius: 50%;
   background-color: var(--pill-background);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--accent-color);
+  border: 1.5px solid var(--accent-color);
   box-shadow: var(--shadow);
 }
 
@@ -278,7 +278,7 @@ body {
   transform: translateX(-50%);
   width: 20px;
   height: 3px;
-  background: rgba(255,255,255,0.4);
+  background: rgba(90, 90, 90, 0.4);
   border-radius: 999px;
   border: none;
   padding: 0;
@@ -374,7 +374,7 @@ body {
 }
 
 /* =========================
-   PLAYGROUND (optional)
+   PLAYGROUND (WIP)
 ========================= */
 
 .tech{
