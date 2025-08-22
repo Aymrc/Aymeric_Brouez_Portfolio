@@ -219,6 +219,45 @@ function setupChatPanel() {
   handle.setAttribute('tabindex', '0');
 }
 
+
+function fitLeadToBar() {
+  const bar  = document.querySelector('.main-bar');
+  const lead = document.querySelector('.elevator-speech .lead');
+  if (!bar || !lead) return;
+
+  // target dimensions
+  const barRect   = bar.getBoundingClientRect();
+  const targetW   = Math.floor(barRect.width);
+  const targetH   = Math.floor(barRect.height);   // cap so text never taller than bar
+  const heightCap = Math.max(1, Math.floor(targetW)); // small breathing room
+
+  // prepare for measurement
+  const prev = lead.style.fontSize;
+  lead.style.fontSize = '1px'; // start tiny to measure cleanly
+
+  // binary search the max font-size that keeps lead <= bar width
+  const measureFits = (px) => {
+    lead.style.fontSize = px + 'px';
+    // clientWidth/scrollWidth both work; scrollWidth is stricter if overflow is hidden
+    return lead.scrollWidth <= targetW;
+  };
+
+  let lo = 1, hi = 512; // sane bounds
+  while (lo < hi) {
+    const mid = Math.ceil((lo + hi) / 2);
+    if (measureFits(mid)) lo = mid; else hi = mid - 1;
+  }
+
+  // apply width-based size, then cap by height
+  const widthFit = lo;
+  const finalPx  = Math.min(widthFit, heightCap);
+  lead.style.fontSize = finalPx + 'px';
+
+  // If you want the text exactly the bar height (not 0.9), set heightCap = targetH
+}
+
+
+
 // ---------- boot ----------
 function wireUp() {
   const preview = document.getElementById('preview');
@@ -233,6 +272,7 @@ function wireUp() {
         }
       });
       recomputeAccent();
+      fitLeadToBar(); // preview image swap can change bar width
     });
 
     mo.observe(preview, {
@@ -245,6 +285,24 @@ function wireUp() {
 
   setupDropdown();
   setupChatPanel();
+
+  // Re-fit on viewport resize
+  window.addEventListener('resize', fitLeadToBar);
+
+  // Re-fit when fonts are ready (so measurements are accurate)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(fitLeadToBar);
+  }
+
+  // Re-fit once DOM is painted
+  requestAnimationFrame(fitLeadToBar);
+
+  // Also observe the bar itself (width can change if its contents change)
+  const bar = document.querySelector('.main-bar');
+  if (bar && 'ResizeObserver' in window) {
+    const ro = new ResizeObserver(fitLeadToBar);
+    ro.observe(bar);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', wireUp);

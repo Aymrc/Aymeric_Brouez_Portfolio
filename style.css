@@ -2,14 +2,17 @@
         VARIABLES
 ========================= */
 :root{
-  --bg-color: #cecece;
+  /* colors */
+  --bg-color: #e0e0e0;
   --pill-background: #222;
   --txt-color: #ffffff;
-  --shadow: 7px 5px 9px rgba(0, 0, 0, 0.23);
-
   --accent-color: #ffa73a; /* fallback of JS */
   --on-accent: #000;
 
+  /* effects */
+  --shadow: 7px 5px 9px rgba(0, 0, 0, 0.23);
+
+  /* sizing */
   --pill-radius: 8px;
   --pill-font-size: 14px;
   --pill-padding-updown: 10px;
@@ -18,6 +21,11 @@
   --pill-height: calc(var(--pill-font-size) + var(--pill-padding-updown) * 2);
   --pill-portrait: calc(var(--pill-font-size) + var(--pill-padding-updown) * 2);
   --pil-gap: 5px;
+
+  /* chat panel sizing */
+  --chat-min-h: 30px; /* collapsed */
+  --chat-max-h: 130px; /* expanded */
+  --chat-overlap: calc(var(--pill-height) / 2); /* sits under pill */
 }
 
 
@@ -28,12 +36,11 @@
 
 body {
   margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
   background-color: var(--bg-color);
-  font-family: Helvetica, sans-serif, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-weight: 100;
 }
 
@@ -42,9 +49,8 @@ body {
           LAYOUT
 ========================= */
 .main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  position: relative;
+  width: max-content; /* shrink-wrap to the bar */
 }
 
 .main-bar {
@@ -201,11 +207,6 @@ body {
   z-index: 3;
 }
 
-.chat-shell {
-  position: relative;
-  z-index: 1;
-}
-
 #chat .caret {
   display: inline-block;
   width: 1ch;
@@ -219,25 +220,19 @@ body {
 }
 
 @keyframes blink {
-  50% {
-    opacity: 0;
-  }
+  50% { opacity: 0; }
 }
+
 
 /* =========================
     CHAT PANEL (history)
 ========================= */
-:root {
-  --chat-min-h: 30px; /* collapsed */
-  --chat-max-h: 130px; /* expanded */
-  --chat-overlap: calc(var(--pill-height) / 2); /* sits under pill */
-}
-
 .chat-shell {
   position: relative;
   display: inline-block;
-  --chat-h: var(--chat-min-h); /* live height for handle */
+  z-index: 1;
   isolation: auto;
+  --chat-h: var(--chat-min-h); /* live height for handle */
 }
 
 /* history panel */
@@ -262,7 +257,7 @@ body {
 
   /* self shadow */
   box-shadow: 6px 8px 24px rgba(0,0,0,0.16),
-    inset 6px 8px 20px rgba(0,0,0,0.025);
+              inset 6px 8px 20px rgba(0,0,0,0.025);
   box-sizing: border-box;
 
   /* glass */
@@ -304,8 +299,6 @@ body {
 .chat-shell.dragging .chat-handle {
   transition: none;
 }
-
-
 
 
 /* =========================
@@ -352,28 +345,51 @@ body {
 
 
 /* =========================
+   ELEVATOR SPEECH (below bar)
+========================= */
+/* Hang the text below the bar without affecting centering */
+.elevator-speech {
+  position: absolute;
+  top: calc(100% + 12px); /* gap below the bar – tweak as you like */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;            /* inherit the bar’s width */
+  text-align: left;
+}
+
+/* Make the line “almost” the same size as the bar height */
+.elevator-speech .lead {
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.elevator-speech .sub {
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+  font-weight: 500;
+  color: darkgray;
+}
+
+/* =========================
    PLAYGROUND (optional)
 ========================= */
-/*
+
 .tech{
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
   letter-spacing: 0.01em;
 }
 
-/* handwriting look for “creativity”
-:root {
-  --scribble-scale: 1.8;     /* tweak this 1.5–2.2 as you like
-  --scribble-baseline: -0.08em; /* vertical nudge to align baseline
-}
-
 .scribble {
   font-family: "Reenie Beanie", cursive;
-  font-weight: 800; /* Reenie Beanie is single-weight
+  font-weight: 700; /* Reenie Beanie is single-weight */
   font-size: calc(1em * var(--scribble-scale));
   line-height: 1;
   letter-spacing: 0.01em;
-  display: inline-block; /* needed so the baseline nudge works
-  transform: translateY(2px);
+  display: inline-block; /* needed so the baseline nudge works */
+  transform: translateY(-1px);
   -webkit-font-smoothing: antialiased;
 }
-*/
+
