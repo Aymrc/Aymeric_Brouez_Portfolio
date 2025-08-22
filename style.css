@@ -3,7 +3,7 @@
 ========================= */
 :root{
   /* colors */
-  --bg-color: #e0e0e0;
+  --bg-color: #e8e8e8;
   --pill-background: #222;
   --txt-color: #ffffff;
   --accent-color: #ffa73a; /* fallback of JS */
@@ -325,6 +325,18 @@ body {
   display: block;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
+
+  transition: transform 320ms cubic-bezier(.22,.7,.18,1);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+#preview:hover img {
+  transform: scale(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #preview img { transition: none; }
 }
 
 
